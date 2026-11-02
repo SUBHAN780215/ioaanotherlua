@@ -3382,52 +3382,12 @@ local function ShowGTLMODVIPMenu()
     if _G.GTLMODMenuAlreadyShown then return end
     if _G.GTLMODState.MenuStep ~= 0 then return end
 
-    pcall(function()
-        local Msg = require("client.slua.logic.common.logic_common_msg_box")
-        if not Msg or type(Msg.Show) ~= "function" then return end
+    _G.GTLMODMenuAlreadyShown = true
+    _G.GTLMODState.MenuStep = 1
 
-        local WELCOME_TEXT = table.concat({
-            "╔══════════════════════════════════╗",
-            "║       SUBHAN VIP MOD MENU        ║",
-            "╚══════════════════════════════════╝",
-            "",
-            "  SYSTEM INFORMATION",
-            "  ──────────────────────────────",
-            "  ●  Connection Status : Active",
-            "  ●  Module Status     : Initialized",
-            "  ●  Security Status   : Enabled",
-            "",
-            "  AVAILABLE FEATURES",
-            "  ──────────────────────────────",
-            "  ✓  Advanced Aim Assistance",
-            "  ✓  Wallhack & ESP System",
-            "  ✓  Visibility Detection",
-            "  ✓  iPad View Configuration",
-            "  ✓  White Body Customization",
-            "  ✓  Additional Advanced Features",
-            "",
-            "  ──────────────────────────────",
-            "  Developer & Administrator",
-            "  DEVELOPER ",
-            "",
-            "  Thank you for choosing SUBHAN VIP.",
-        }, "\n")
-
-        local function OnConfirm()
-            if type(_G.InitModMenuTab) == "function" then
-                _G.InitModMenuTab()
-            end
-            if type(Notify) == "function" then
-                Notify("SUBHAN VIP MOD MENU | Configure your features through the main menu.")
-            end
-            _G.GTLMODMenuAlreadyShown = true
-        end
-
-        local function OnCancel() end
-
-        _G.GTLMODState.MenuStep = 1
-        Msg.Show(1, "SUBHAN VIP | SYSTEM INFORMATION", WELCOME_TEXT, OnConfirm, OnCancel, "CONTINUE", "CLOSE")
-    end)
+    if type(_G.InitModMenuTab) == "function" then
+        _G.InitModMenuTab()
+    end
 end
 
 -- ========================================== 
